@@ -6,7 +6,7 @@
             SocialFormatter
         </h1>
 
-        <h2 class="mb-12 text-base font-semibold text-center md:text-lg text-slate-300">
+        <h2 class="mb-12 text-base font-semibold leading-relaxed text-center md:text-lg text-slate-300">
             ✨ <em>SocialFormatter</em> is a free online tool that makes it easy to add bold, italic, and other text styles to your social media posts on Facebook, LinkedIn, X, Instagram, and more. Enhance your posts to stand out and drive engagement! ✨
         </h2>
 
