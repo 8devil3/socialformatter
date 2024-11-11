@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-gradient {
+    @apply max-w-sm mx-auto text-transparent bg-gradient-to-r from-blue-500 via-green-500 to-red-500 bg-clip-text;
+}
