@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#app {
+    @apply w-full max-w-4xl p-4 mx-auto md:p-8;
+}
+
 .text-gradient {
     @apply text-transparent bg-gradient-to-r from-blue-500 via-violet-500 to-fuchsia-500 bg-clip-text;
 }

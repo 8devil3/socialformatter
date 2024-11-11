@@ -1,5 +1,5 @@
 <template>
-    <main class="max-w-4xl p-4 mx-auto md:p-8">
+    <main>
         <div class="mb-3 text-xs font-bold text-center uppercase text-emerald-400">free tool</div>
 
         <h1 class="mx-auto mb-4 text-3xl font-extrabold text-center w-fit md:mb-6 md:text-5xl text-gradient">
@@ -58,7 +58,7 @@
             </fieldset>
         </div>
 
-        <textarea ref="textareaRef" rows="16" placeholder="Type your text..." autofocus class="focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:shadow-inner w-full block bg-slate-800 focus:border-violet-500 border-slate-400 border rounded-xl px-2.5 py-2"></textarea>
+        <textarea ref="textareaRef" rows="16" placeholder="Type your text and select it to format..." autofocus class="focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:shadow-inner w-full block bg-slate-800 focus:border-violet-500 border-slate-400 border rounded-xl px-2.5 py-2"></textarea>
 
         <div class="grid grid-cols-2 gap-2 mt-4 md:grid-cols-4">
             <button type="button" @click="copyText()" class="font-normal px-3 text-sm py-1.5 rounded-md border-2 border-green-500 text-green-500 hover:text-white hover:bg-green-500/50 transition-colors col-span-full md:col-span-1 w-full truncate">
@@ -82,12 +82,23 @@
                 Reset all
             </button>
 
-            <button type="button" @click="removeText()" class="font-normal px-3 text-sm py-1.5 rounded-md border-red-500 border-2 text-red-500 hover:text-white hover:bg-red-500/50 transition-colors md:col-span-1 col-span-full w-full truncate">
+            <button type="button" @click="deleteText()" class="font-normal px-3 text-sm py-1.5 rounded-md border-red-500 border-2 text-red-500 hover:text-white hover:bg-red-500/50 transition-colors md:col-span-1 col-span-full w-full truncate">
                 <i class="mr-1 fa-solid fa-trash" />
                 Delete text
             </button>
         </div>
     </main>
+
+    <footer class="flex justify-between mt-16 text-sm text-slate-400">
+        <div>
+            &copy; {{ new Date().getFullYear() }}
+            <a href="https://www.orangeweb.biz" class="font-semibold text-orange-500 transition-colors hover:text-orange-400">OrangeWeb</a>
+        </div>
+
+        <div>
+            Cookies
+        </div>
+    </footer>
 </template>
 
 <script setup>
@@ -242,9 +253,8 @@ const copyText = ()=>{
     }, 2000);
 };
 
-const removeText = ()=>{
+const deleteText = ()=>{
     textareaRef.value.value = null;
-    textareaRef.value.focus();
 };
 
 </script>
