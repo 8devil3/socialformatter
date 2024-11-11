@@ -42,7 +42,7 @@
 
 
             <fieldset class="grid grid-cols-3 gap-2 p-2 border-2 border-fuchsia-600 rounded-xl md:grid-cols-none md:auto-cols-auto md:grid-flow-col">
-                <legend class="px-1 text-[13px] font-bold">Others</legend>
+                <legend class="px-1 text-[13px] font-bold">Other styles</legend>
 
                 <Button @click="resetFormat(unicodeMaps.handwrite, getSelectedText())" title="handwrite" class="bg-fuchsia-600 hover:bg-fuchsia-500">
                     𝓗𝓪𝓷𝓭𝔀𝓻𝓲𝓽𝓮
