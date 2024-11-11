@@ -14,15 +14,15 @@
             <fieldset class="grid grid-cols-3 gap-2 p-2 border-2 border-blue-600 rounded-xl md:grid-cols-none md:auto-cols-auto md:grid-flow-col">
                 <legend class="px-1 text-[13px] font-bold">Sans serif</legend>
 
-                <Button @click="clearFormat(unicodeMaps.boldSansSerif, getSelectedText())" title="bold sans serif" color="blue">
+                <Button @click="clearFormat(unicodeMaps.boldSansSerif, getSelectedText())" title="bold sans serif" class="font-bold bg-blue-600 hover:bg-blue-500">
                     Bold
                 </Button>
 
-                <Button @click="clearFormat(unicodeMaps.italicSansSerif, getSelectedText())" title="italic sans serif" color="blue">
+                <Button @click="clearFormat(unicodeMaps.italicSansSerif, getSelectedText())" title="italic sans serif" class="italic bg-blue-600 hover:bg-blue-500">
                     Italic
                 </Button>
 
-                <Button @click="clearFormat(unicodeMaps.boldItalicSansSerif, getSelectedText())" title="bold italic sans serif" color="blue">
+                <Button @click="clearFormat(unicodeMaps.boldItalicSansSerif, getSelectedText())" title="bold italic sans serif" class="italic font-bold bg-blue-600 hover:bg-blue-500">
                     Bold italic
                 </Button>
             </fieldset>
@@ -31,12 +31,12 @@
             <fieldset class="grid grid-cols-2 gap-2 p-2 border-2 border-violet-600 rounded-xl md:grid-cols-none md:auto-cols-auto md:grid-flow-col">
                 <legend class="px-1 text-[13px] font-bold">Serif</legend>
 
-                <Button @click="clearFormat(unicodeMaps.boldSerif, getSelectedText())" title="bold serif" color="violet">
-                    Bold
+                <Button @click="clearFormat(unicodeMaps.boldSerif, getSelectedText())" title="bold serif" class="bg-violet-600 hover:bg-violet-500">
+                    𝑩𝒐𝒍𝒅
                 </Button>
 
-                <Button @click="clearFormat(unicodeMaps.boldItalicSerif, getSelectedText())" title="bold italic serif" color="violet">
-                    Bold italic
+                <Button @click="clearFormat(unicodeMaps.boldItalicSerif, getSelectedText())" title="bold italic serif" class="bg-violet-600 hover:bg-violet-500">
+                    𝑩𝒐𝒍𝒅 𝒊𝒕𝒂𝒍𝒊𝒄
                 </Button>
             </fieldset>
 
