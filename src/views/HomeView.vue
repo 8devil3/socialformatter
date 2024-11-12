@@ -95,8 +95,9 @@
             <a href="https://www.orangeweb.biz" class="font-semibold text-orange-500 transition-colors hover:text-orange-400">OrangeWeb</a>
         </div>
 
-        <div>
-            Cookies
+        <div class="flex flex-wrap gap-2">
+            <a href="https://www.iubenda.com/privacy-policy/58923215" class="iubenda-black iubenda-noiframe iubenda-embed " title="Privacy Policy ">Privacy Policy</a>
+            <a href="https://www.iubenda.com/privacy-policy/58923215/cookie-policy" class="iubenda-black iubenda-noiframe iubenda-embed " title="Cookie Policy ">Cookie Policy</a>
         </div>
     </footer>
 </template>
