@@ -13,3 +13,7 @@
     @apply text-transparent bg-linear-to-r from-blue-500 via-violet-500 to-fuchsia-500 bg-clip-text;
     text-shadow: #6f00ff 0 0 24px;
 }
+
+button {
+    @apply cursor-pointer;
+}
