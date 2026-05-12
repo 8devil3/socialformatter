@@ -160,16 +160,6 @@ const resetAll = ()=>{
 };
 
 const resetFormat = (unicodeMap = null, text = '')=>{
-    // const reverseMaps = {};
-    // for (const uMap in unicodeMaps) {
-    //     const map = unicodeMaps[uMap];
-    //     reverseMaps[uMap] = {};
-    //     for (const letter in map) {
-    //         const code = map[letter];
-    //         reverseMaps[uMap][code] = letter;
-    //     }
-    // }
-
     const reverseBoldSansSerif = {};
     for (const bold in unicodeMaps.boldSansSerif) {
         reverseBoldSansSerif[unicodeMaps.boldSansSerif[bold]] = bold;
