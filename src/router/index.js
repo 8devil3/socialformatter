@@ -1,23 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import { pages, siteUrl } from '../content/pages';
 
-const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: HomeView,
-        },
-        // {
-        //   path: '/about',
-        //   name: 'about',
-        //   // route level code-splitting
-        //   // this generates a separate chunk (About.[hash].js) for this route
-        //   // which is lazy-loaded when the route is visited.
-        //   // component: () => import('../views/AboutView.vue'),
-        // },
-    ],
-})
+export const routes = pages.map((page) => ({
+    path: page.path,
+    name: page.key,
+    component: HomeView,
+    meta: {
+        title: page.title,
+        description: page.description,
+        canonical: `${siteUrl}${page.path === '/' ? '' : page.path}`,
+        pageKey: page.key,
+    },
+}));
 
-export default router
+export const createAppRouter = (isServer = false) => createRouter({
+    history: isServer ? createMemoryHistory(import.meta.env.BASE_URL) : createWebHistory(import.meta.env.BASE_URL),
+    routes,
+});

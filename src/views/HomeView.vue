@@ -1,18 +1,20 @@
 <template>
     <main>
-        <div class="mb-3 text-xs font-bold text-center uppercase text-emerald-400">free tool</div>
+        <div class="mb-3 text-xs font-bold text-center uppercase text-emerald-400">{{ page.eyebrow }}</div>
 
         <h1 class="mx-auto mb-4 text-3xl font-extrabold text-center w-fit md:mb-6 md:text-5xl text-gradient">
-            SocialFormatter
+            {{ page.h1 }}
         </h1>
 
         <p class="max-w-3xl mx-auto mb-10 text-base font-semibold leading-relaxed text-center md:text-lg text-slate-300">
-            ✨ Format text for Facebook, LinkedIn, X, Instagram, TikTok, YouTube, and any social network that does not support Markdown. Convert plain text into Unicode bold, italic, serif, gothic, script, and monospace styles that you can paste anywhere. ✨
+            <span aria-hidden="true">&#10024;</span>
+            {{ page.intro }}
+            <span aria-hidden="true">&#10024;</span>
         </p>
 
         <div class="grid grid-cols-1 gap-2 mt-5 lg:grid-cols-none lg:auto-cols-auto lg:grid-flow-col">
             <fieldset
-                v-for="group in styleGroups"
+                v-for="group in visibleStyleGroups"
                 :key="group.label"
                 class="grid gap-2 p-2 border-2 rounded-xl"
                 :class="[group.borderClass, group.gridClass]"
@@ -41,8 +43,8 @@
                 <textarea
                     ref="inputRef"
                     v-model="inputText"
-                    rows="8"
-                    placeholder="Type your text here. Select a word or phrase, then choose a style."
+                    rows="12"
+                    placeholder="Type your text here then choose a style."
                     autofocus
                     class="focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:shadow-inner w-full block bg-slate-800 focus:border-violet-500 border-slate-400 border rounded-xl px-3 py-2.5 resize-y"
                     @select="storeSelection"
@@ -60,7 +62,7 @@
 
                 <textarea
                     :value="resultText"
-                    rows="8"
+                    rows="12"
                     readonly
                     placeholder="Your formatted text will appear here."
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-500/30 w-full block bg-slate-900 border-slate-500 border rounded-xl px-3 py-2.5 resize-y"
@@ -83,20 +85,62 @@
             </button>
         </div>
 
+        <section class="mt-14">
+            <h2 class="mb-5 text-2xl font-extrabold text-slate-100">{{ page.examplesTitle }}</h2>
+
+            <div class="grid gap-3 md:grid-cols-3">
+                <article
+                    v-for="example in page.examples"
+                    :key="example.label"
+                    class="p-4 border rounded-lg bg-slate-900/60 border-slate-700"
+                >
+                    <h3 class="mb-3 text-sm font-bold uppercase text-emerald-400">{{ example.label }}</h3>
+                    <p class="mb-2 text-sm text-slate-400">{{ example.before }}</p>
+                    <p class="font-semibold text-slate-100">{{ example.after }}</p>
+                </article>
+            </div>
+        </section>
+
         <section class="space-y-5 leading-relaxed mt-14 text-slate-300">
-            <h2 class="text-2xl font-extrabold text-slate-100">Unicode text formatter for social media posts</h2>
+            <h2 class="text-2xl font-extrabold text-slate-100">{{ page.bodyTitle }}</h2>
 
-            <p>
-                SocialFormatter helps creators, marketers, founders, recruiters, and community managers style social media posts without Markdown, HTML, or platform-specific formatting tools. Write your caption, select the part you want to emphasize, choose a Unicode style, then copy the formatted result into your post.
+            <p v-for="paragraph in page.body" :key="paragraph">
+                {{ paragraph }}
             </p>
+        </section>
 
-            <p>
-                Use it as a bold text generator, italic text generator, script text converter, gothic font generator, monospace text formatter, or quick social media text editor for LinkedIn posts, Facebook updates, Instagram captions, X posts, TikTok bios, YouTube descriptions, and profile text.
-            </p>
+        <section class="mt-14">
+            <h2 class="mb-5 text-2xl font-extrabold text-slate-100">Frequently asked questions</h2>
 
-            <p>
-                The generated characters are Unicode symbols, so they usually survive copy and paste across apps. They are useful for visual emphasis, but they are not a replacement for semantic formatting: keep important content readable, avoid overusing decorative styles, and test the final post on the platform where you plan to publish it.
-            </p>
+            <div class="space-y-3">
+                <details
+                    v-for="item in page.faq"
+                    :key="item.question"
+                    class="p-4 border rounded-lg bg-slate-900/60 border-slate-700"
+                >
+                    <summary class="flex items-center justify-between gap-8 font-bold cursor-pointer text-slate-100">
+                        <div>{{ item.question }}</div>
+                        <i class="text-violet-500 fas fa-chevron-down" />
+                    </summary>
+                    <p class="mt-3 leading-relaxed text-slate-300">{{ item.answer }}</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="mt-14">
+            <h2 class="mb-5 text-2xl font-extrabold text-slate-100">More text tools</h2>
+
+            <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                <RouterLink
+                    v-for="item in relatedPages"
+                    :key="item.path"
+                    :to="item.path"
+                    class="block p-4 transition-colors border rounded-lg bg-slate-900/60 border-slate-700 hover:border-emerald-500/70 hover:bg-slate-800"
+                >
+                    <span class="block mb-2 font-bold text-slate-100">{{ item.h1 }}</span>
+                    <span class="block text-sm leading-relaxed text-slate-400">{{ item.description }}</span>
+                </RouterLink>
+            </div>
         </section>
     </main>
 
@@ -115,49 +159,28 @@
 
 <script setup>
 import { computed, ref } from 'vue';
+import { onBeforeRouteUpdate, RouterLink, useRoute } from 'vue-router';
 import Button from '@/components/Button.vue';
 import unicodeMaps from '../unicodeMaps.json';
+import { getPageByPath, pages, styleGroups } from '../content/pages';
 
+const route = useRoute();
 const inputRef = ref(null);
-const inputText = ref('');
+const inputText = ref(getPageByPath(route.path).defaultText);
 const isCopied = ref(false);
 const selection = ref({ start: 0, end: 0 });
 const formatRanges = ref([]);
 
-const styleGroups = [
-    {
-        label: 'Sans serif',
-        borderClass: 'border-blue-600',
-        buttonClass: 'bg-blue-600 hover:bg-blue-500',
-        gridClass: 'grid-cols-3 lg:grid-cols-none lg:auto-cols-auto lg:grid-flow-col',
-        styles: [
-            { key: 'boldSansSerif', label: '𝗕𝗼𝗹𝗱', title: 'bold sans serif' },
-            { key: 'italicSansSerif', label: '𝘪𝘵𝘢𝘭𝘪𝘤', title: 'italic sans serif' },
-            { key: 'boldItalicSansSerif', label: '𝘽𝙤𝙡𝙙 𝙞𝙩𝙖𝙡𝙞𝙘', title: 'bold italic sans serif' },
-        ],
-    },
-    {
-        label: 'Serif',
-        borderClass: 'border-violet-600',
-        buttonClass: 'bg-violet-600 hover:bg-violet-500',
-        gridClass: 'grid-cols-2 lg:grid-cols-none lg:auto-cols-auto lg:grid-flow-col',
-        styles: [
-            { key: 'boldSerif', label: '𝐁𝐨𝐥𝐝', title: 'bold serif' },
-            { key: 'boldItalicSerif', label: '𝑩𝒐𝒍𝒅 𝒊𝒕𝒂𝒍𝒊𝒄', title: 'bold italic serif' },
-        ],
-    },
-    {
-        label: 'Other styles',
-        borderClass: 'border-fuchsia-600',
-        buttonClass: 'bg-fuchsia-600 hover:bg-fuchsia-500',
-        gridClass: 'grid-cols-3 lg:grid-cols-none lg:auto-cols-auto lg:grid-flow-col',
-        styles: [
-            { key: 'handwrite', label: '𝓗𝓪𝓷𝓭𝔀𝓻𝓲𝓽𝓮', title: 'handwrite' },
-            { key: 'gothic', label: '𝕲𝖔𝖙𝖍𝖎𝖈', title: 'gothic' },
-            { key: 'monospace', label: '𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎', title: 'monospace' },
-        ],
-    },
-];
+const page = computed(() => getPageByPath(route.path));
+
+const relatedPages = computed(() => pages.filter((item) => item.path !== page.value.path));
+
+const visibleStyleGroups = computed(() => styleGroups
+    .map((group) => ({
+        ...group,
+        styles: group.styles.filter((style) => page.value.preferredStyles.includes(style.key)),
+    }))
+    .filter((group) => group.styles.length));
 
 const reverseMap = Object.values(unicodeMaps).reduce((map, unicodeMap) => {
     Object.entries(unicodeMap).forEach(([plainLetter, codePoint]) => {
@@ -199,6 +222,12 @@ const resultText = computed(() => {
 
     output += sourceText.slice(cursor);
     return output;
+});
+
+onBeforeRouteUpdate((to) => {
+    inputText.value = getPageByPath(to.path).defaultText;
+    formatRanges.value = [];
+    selection.value = { start: 0, end: 0 };
 });
 
 const storeSelection = () => {

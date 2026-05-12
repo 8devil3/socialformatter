@@ -1,11 +1,7 @@
 import './assets/app.css';
+import { createSocialFormatterApp } from './app';
 
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
+const { app, router } = createSocialFormatterApp(false);
 
-const app = createApp(App);
-
-app.use(router);
-
+await router.isReady();
 app.mount('#app');
