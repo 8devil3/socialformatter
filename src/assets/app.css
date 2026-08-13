@@ -1,9 +1,5 @@
 @import "tailwindcss";
-
-@theme {
-    --font-sans: 'Lato', 'sans-serif';
-    --font-serif: 'DM Serif Display', 'serif';
-}
+@import "theme.css";
 
 #app {
     @apply w-full max-w-4xl p-4 mx-auto md:p-8;
@@ -11,7 +7,7 @@
 
 .text-gradient {
     @apply text-transparent bg-linear-to-r from-blue-500 via-violet-500 to-fuchsia-500 bg-clip-text;
-    text-shadow: #6f00ff 0 0 24px;
+    text-shadow: #6f00ff80 0 0 24px;
 }
 
 button {
