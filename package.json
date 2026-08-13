@@ -17,6 +17,7 @@
     "devDependencies": {
         "@vitejs/plugin-vue": "^6",
         "autoprefixer": "^10.5",
+        "daisyui": "^5.7.16",
         "vite": "^7",
         "vite-plugin-vue-devtools": "^7.5.4"
     },
