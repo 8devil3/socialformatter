@@ -33,12 +33,9 @@
             </fieldset>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-1 md:gap-6 mt-4 md:grid-cols-2">
             <section class="min-w-0">
-                <div class="flex items-end justify-between gap-3 mb-3">
-                    <h2 class="text-lg font-bold text-base-content">Write your text</h2>
-                    <span class="text-xs font-semibold text-base-content/50">{{ inputText.length }} chars</span>
-                </div>
+                <h2 class="text-lg mb-3 font-bold text-base-content">Write your text</h2>
 
                 <textarea
                     id="input-text"
@@ -53,13 +50,12 @@
                     @mouseup="storeSelection"
                     @input="handleInput"
                 />
+
+                <div class="text-xs text-right mt-1 font-semibold text-base-content/50">{{ inputText.length }} chars</div>
             </section>
 
             <section class="min-w-0">
-                <div class="flex items-end justify-between gap-3 mb-3">
-                    <h2 class="text-lg font-bold text-base-content">Formatted result</h2>
-                    <span class="text-xs font-semibold text-base-content/50">{{ resultText.length }} chars</span>
-                </div>
+                <h2 class="text-lg font-bold text-base-content mb-3">Formatted result</h2>
 
                 <textarea
                     id="formatted-result"
