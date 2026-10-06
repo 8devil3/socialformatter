@@ -37,10 +37,11 @@
             <section class="min-w-0">
                 <div class="flex items-end justify-between gap-3 mb-3">
                     <h2 class="text-lg font-bold text-base-content">Write your text</h2>
-                    <span class="text-xs font-semibold text-base-300">{{ inputText.length }} chars</span>
+                    <span class="text-xs font-semibold text-base-content/50">{{ inputText.length }} chars</span>
                 </div>
 
                 <textarea
+                    id="input-text"
                     ref="inputRef"
                     v-model="inputText"
                     rows="12"
@@ -57,10 +58,11 @@
             <section class="min-w-0">
                 <div class="flex items-end justify-between gap-3 mb-3">
                     <h2 class="text-lg font-bold text-base-content">Formatted result</h2>
-                    <span class="text-xs font-semibold text-base-300">{{ resultText.length }} chars</span>
+                    <span class="text-xs font-semibold text-base-content/50">{{ resultText.length }} chars</span>
                 </div>
 
                 <textarea
+                    id="formatted-result"
                     :value="resultText"
                     rows="12"
                     readonly
@@ -71,16 +73,16 @@
         </div>
 
         <div class="grid grid-cols-3 gap-2 mt-4">
-            <button type="button" @click="copyText" class="btn btn-success">
+            <button type="button" @click="copyText" class="btn btn-success md:text-base">
                 <template v-if="!isCopied">Copy result</template>
                 <template v-else>Copied!</template>
             </button>
 
-            <button type="button" @click="resetAll" class="btn btn-warning">
+            <button type="button" @click="resetAll" class="btn btn-warning md:text-base">
                 Reset all
             </button>
 
-            <button type="button" @click="deleteText" class="btn btn-error">
+            <button type="button" @click="deleteText" class="btn btn-error md:text-base">
                 Delete text
             </button>
         </div>
@@ -147,7 +149,7 @@
     <footer class="flex flex-col gap-4 mt-16 text-sm md:flex-row md:items-center md:justify-between text-base-content/50">
         <div>
             &copy; {{ new Date().getFullYear() }}
-            <a href="https://www.orangeweb.biz" class="font-semibold text-orange-500 transition-colors hover:text-orange-400">OrangeWeb</a>
+            <a href="https://orangeweb.biz" class="font-semibold text-orange-500 transition-colors hover:text-orange-400">OrangeWeb</a>
         </div>
 
         <div class="flex flex-wrap gap-2">
